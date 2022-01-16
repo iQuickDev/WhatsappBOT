@@ -14,18 +14,14 @@ module.exports = class AdminManager
         console.log("AdminManager loaded!")
     }
 
-    isAdmin(message)
-    {
-        return message.isSelf
-    }
-
     eval(message, info)
     {
-        if (isAdmin(message))
+        if (message.fromMe)
         {
             try
             {
                 message.reply(eval(info.args[0]).toString())
+                return
             }
             catch (error) { message.reply(error.toString()) }
         }
