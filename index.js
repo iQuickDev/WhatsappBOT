@@ -13,9 +13,9 @@ exports.modules = modules
 const NSFW = new NSFWManager(client)
 const Admin = new AdminManager(client)
 const Misc = new MiscManager(client)
-const Game = new GameManager(client)
+//const Game = new GameManager(client)
 
-modules.push(NSFW, Admin, Misc, Game)
+modules.push(NSFW, Admin, Misc, /*Game*/)
 
 client.on('qr', (qr) => QRCode.generate(qr, { small: true }))
 
@@ -72,14 +72,17 @@ async function parseMessage(message)
 
     console.log(info)
 
-    for (let i = 0; i < modules.length; i++)
+    if (info.isCommand)
     {
-        for (let j = 0; j < modules[i].commands.length; j++)
+        for (let i = 0; i < modules.length; i++)
         {
-            if (info.command.name == modules[i].commands[j].name)
+            for (let j = 0; j < modules[i].commands.length; j++)
             {
-                modules[i].commands[j](message, info.command)
-                return
+                if (info.command.name == modules[i].commands[j].name)
+                {
+                    modules[i].commands[j](message, info.command)
+                    return
+                }
             }
         }
     }

@@ -1,6 +1,8 @@
 const booru = require('booru')
 const request = require('request').defaults({ encoding: null })
 const wikifeet = require('wikifeet-js')
+const pornhub = require('@justalk/pornhub-api')
+const waifu = require("waifu.pics.js")
 const { MessageMedia } = require('whatsapp-web.js')
 
 module.exports = class NSFWManager
@@ -15,8 +17,16 @@ module.exports = class NSFWManager
         this.client = client
         this.moduleName = "NSFW"
         this.moduleDescription = "Explicit content"
-        this.commands = [this.r34, this.feet]
+        this.commands = [this.pornhub, this.r34, this.feet, this.waifu]
         console.log("NSFWManager loaded!")
+    }
+
+    async pornhub(message, info)
+    {
+        let videos = await pornhub.search(info.args[0])
+        let randomVideo = videos.results[Randomizer(videos.results.length)]
+        console.log(randomVideo)
+        message.reply(`*Title*: ${randomVideo.title}\n*Author:* ${randomVideo.author}\n*Views*: ${Math.round(randomVideo.views)}\n*URL*: ${randomVideo.link}`)
     }
 
     r34(message, info)
@@ -61,6 +71,24 @@ module.exports = class NSFWManager
                 message.reply(media)
             }
         })
+    }
+
+    async waifu(message, info)
+    {
+        await waifu().then(data =>
+        {
+            let image = data.files[Randomizer(data.files.length)]
+
+            request.get(image, function (error, response, body)
+            {
+                if (!error && response.statusCode == 200)
+                {
+                    let data = Buffer.from(body).toString('base64')
+                    const media = new MessageMedia("image/png", data)
+                    message.reply(media)
+                }
+            })
+        }).catch(err => (message.reply(err.toString())))
     }
 }
 

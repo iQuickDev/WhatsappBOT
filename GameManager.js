@@ -11,21 +11,14 @@ module.exports = class GameManager
         this.client = client
         this.moduleName = "Games"
         this.moduleDescription = "Game related commands"
-        this.commands = [this.guess, this.hangman, this.tictactoe, this.guessthenumber]
-        this.games = []
+        this.commands = [this.hangman, this.tictactoe, this.guessthenumber]
+        this.games = new Array()
         console.log("GameManager loaded!")
     }
 
     hangman(message, info)
     {
-        let game = new HangMan(this.client, message, info, 0)
-        this.games.push(game)
-    }
-
-    guess(message, info)
-    {
-        console.log("Entered GM guess")
-        this.games[0].guess(message, info)
+        this.games.push(new HangMan(this.client, message, info, this.games.length))
     }
 
     tictactoe(message, info)
@@ -60,24 +53,20 @@ class HangMan
         this.maxErrors = 7
 
         for (let i = 0; i < this.secretWord.length; i++)
-            this.showedWord.push("_")
+        if (i = 0 || i == this.secretWord.length - 1)
+        this.showedWord[i] = this.secretWord[i]
+        else
+        this.showedWord[i] = " _ "
     }
 
     guess(message, info)
     {
-        console.log("Entered HM guess")
-        // if (message.from == this.host)
-        // {
-        //     message.reply("The host can't guess!")
-        //     return
-        // }
-
-        if (info.args[0].length != 1)
+        if (message.from == this.host)
         {
-            message.reply("You can only guess one letter or the whole word!")
+            message.reply("The host can't guess!")
             return
         }
-
+        
         if (info.args[0].length == this.secretWord.length && info.args[0] == this.secretWord)
         {
             message.reply("GG, you guessed the right word!")
@@ -88,6 +77,12 @@ class HangMan
             message.reply("You guessed the wrong word!")
             this.errors++
             this.checkErrors()
+            return
+        }
+
+        if (info.args[0].length != 1)
+        {
+            message.reply("You can only guess one letter or the whole word!")
             return
         }
 
@@ -115,7 +110,7 @@ class HangMan
 
     gameInfoMessage(message, info)
     {
-        message.reply(`*Word:* ${this.showedWord.toString()}\n*Errors:* ${this.errors} / ${this.maxErrors}`)
+        message.reply(`*Word:* ${this.showedWord.toString().replace(',','')}\n*Errors:* ${this.errors} / ${this.maxErrors}`)
     }
 
     checkErrors()
