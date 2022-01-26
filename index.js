@@ -3,9 +3,21 @@ const NSFWManager = require("./NSFWManager.js")
 const AdminManager = require("./AdminManager.js")
 const MiscManager = require('./MiscManager.js')
 const GameManager = require('./GameManager.js')
+const FileSystem = require('fs')
 const QRCode = require('qrcode-terminal')
 const config = require('./config.json')
-const client = new Client()
+
+let session = null
+
+try
+{
+    session = JSON.parse(FileSystem.readFileSync('./session.json'))
+    console.log('Session recovered successfully!')
+} catch (error) { console.log('No session found, please login') }
+
+const client = new Client({
+    session: session
+})
 
 var modules = []
 exports.modules = modules
@@ -22,6 +34,11 @@ client.on('qr', (qr) => QRCode.generate(qr, { small: true }))
 client.on('ready', () =>
 {
     console.log("Successfully logged in!")
+})
+
+client.on('authenticated', (session) =>
+{
+    FileSystem.writeFileSync('./session.json', JSON.stringify(session, null, 2))
 })
 
 client.on('message_create', message =>

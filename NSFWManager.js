@@ -17,7 +17,7 @@ module.exports = class NSFWManager
         this.client = client
         this.moduleName = "NSFW"
         this.moduleDescription = "Explicit content"
-        this.commands = [this.pornhub, this.r34, this.feet, this.waifu]
+        this.commands = [this.pornhub, this.r34, this.feet, this.waifu, this.cocksize]
         console.log("NSFWManager loaded!")
     }
 
@@ -89,6 +89,19 @@ module.exports = class NSFWManager
                 }
             })
         }).catch(err => (message.reply(err.toString())))
+    }
+
+    cocksize(message, info)
+    {
+        let randomSize = Randomizer(16)
+        let cockString = '8'
+        for (let i = 0; i < randomSize; i++)
+        {
+            cockString += '='
+        }
+        cockString += 'D'
+
+        message.reply(`Your cock looks like this:\n${cockString}`)
     }
 }
 

@@ -17,7 +17,6 @@ module.exports = class MiscManager
         this.moduleDescription = "Miscellaneous commands"
         this.commands = [this.help, this.uptime, this.igprofile, this.anime]
         console.log("MiscManager loaded!")
-        console.log(this.scraperClient)
     }
 
     help(message, info)
@@ -50,7 +49,6 @@ module.exports = class MiscManager
             uptimeString += `${minutes} minutes `
         uptimeString += `${seconds} seconds`
         message.reply(uptimeString)
-        console.log(index.cock)
     }
 
     async igprofile(message, info)
