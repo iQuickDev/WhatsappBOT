@@ -1,0 +1,103 @@
+@import 'https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@900&display=swap';
+
+*
+{
+    padding: 0;
+    margin: 0;
+    font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+video::-webkit-media-controls-panel
+{
+    background-image: linear-gradient(transparent, transparent) !important;
+}
+
+body 
+{
+    text-align: center;
+    overflow: hidden;
+}
+
+header
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #404040;
+    padding: 10px;
+    color: #ff007d;
+    font-size: 1.5rem;
+}
+
+main
+{
+    background: #303030;
+    width: 100%;
+    height: 100vh;
+    display: grid;
+}
+
+#animecontent
+{
+    width: 70%;
+    align-self: center;
+    margin: auto;
+    border-radius: 10px;
+}
+
+footer
+{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #404040;
+    padding: 10px;
+    color: #ff007d;
+    font-size: 2rem;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+@media only screen and (max-width: 576px)
+{
+    header, footer
+    {
+        font-size: 1rem;
+    }
+
+    #animecontent
+    {
+        width: 90%;
+    }
+
+    footer span
+    {
+        display: block;
+    }
+}
+
+
+@media only screen and (max-height: 550px)
+{
+    body
+    {
+        overflow: auto;
+    }
+
+    header
+    {
+        display: none;
+    }
+
+    #animecontent
+    {
+        width: 65%;
+    }
+
+    footer
+    {
+        display: none;
+    }
+}
+

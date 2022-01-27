@@ -3,6 +3,7 @@ const NSFWManager = require("./NSFWManager.js")
 const AdminManager = require("./AdminManager.js")
 const MiscManager = require('./MiscManager.js')
 const GameManager = require('./GameManager.js')
+const ServerManager = require('./ServerManager.js')
 const FileSystem = require('fs')
 const QRCode = require('qrcode-terminal')
 const config = require('./config.json')
@@ -18,6 +19,11 @@ try
 const client = new Client({
     session: session
 })
+
+const Server = new ServerManager()
+exports.server = Server
+
+
 
 var modules = []
 exports.modules = modules

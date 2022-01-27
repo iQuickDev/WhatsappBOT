@@ -23,7 +23,7 @@ module.exports = class GameManager
 
     tictactoe(message, info)
     {
-
+        
     }
 
     guessthenumber(message, info)

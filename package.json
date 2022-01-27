@@ -11,7 +11,11 @@
   "dependencies": {
     "@justalk/pornhub-api": "^3.5.0",
     "booru": "^2.5.3",
+    "express": "^4.17.2",
+    "fake-identity": "^1.0.6",
     "i": "^0.3.7",
+    "jsdom": "^19.0.0",
+    "jwplayer-scraper": "^1.2.0",
     "mal-scraper": "^2.11.4",
     "npm": "^8.3.2",
     "puppeteer": "^13.1.2",
