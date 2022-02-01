@@ -1,3 +1,4 @@
 {
-    "prefix": "wp"
+    "prefix": "wp",
+    "adminpassword": "admin"
 }

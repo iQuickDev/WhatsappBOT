@@ -42,8 +42,11 @@ module.exports = class MiscManager
         let uptime = process.uptime()
         let uptimeString = ""
         let days = Math.floor(uptime / 86400)
+        uptime -= days * 86400
         let hours = Math.floor(uptime / 3600)
+        uptime -= hours * 3600
         let minutes = Math.floor(uptime / 60)
+        uptime -= minutes * 60
         let seconds = Math.floor(uptime % 60)
         if (days > 0)
             uptimeString += `${days} days `
@@ -85,8 +88,6 @@ module.exports = class MiscManager
             return
         }
 
-        index.server.stop()
-
         let link = info.args[0]
         let title
         let source
@@ -107,6 +108,9 @@ module.exports = class MiscManager
             source: source
         }
 
+        if (index.server.isRunning)
+        index.server.updateStream(streamInfo)
+        else
         index.server.start(6969, streamInfo)
 
         message.reply('Stream started at http://quicksense.ddns.net:6969')

@@ -1,4 +1,5 @@
 const express = require('express')
+const { createHttpTerminator } = require('http-terminator')
 
 module.exports = class ServerManager
 {
@@ -13,7 +14,6 @@ module.exports = class ServerManager
         this.app.use(express.json())
         this.app.get('/', (req, res) => res.sendFile('./stream/index.html'))
         this.app.get('/info', (req, res) => res.send(this.streamInfo))
-
         console.log("ServerManager loaded!")
     }
 
@@ -23,16 +23,13 @@ module.exports = class ServerManager
         this.streamInfo = streamInfo
 
         if (!this.isRunning)
-        this.app.listen(this.port, () => console.log(`ServerManager is listening on port ${port}`))
+        {
+            this.app.listen(this.port, () => console.log(`ServerManager is listening on port ${port}`))
+            this.isRunning = true
+        }
     }
 
-    stop()
-    {
-        if (this.isRunning)
-        this.app.close()
-    }
-
-    updateInfo(streamInfo)
+    updateStream(streamInfo)
     {
         this.streamInfo = streamInfo
     }
