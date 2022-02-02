@@ -1,4 +1,5 @@
 const index = require('./index.js')
+const config = require('./config.json')
 const igScraper = require('scraper-instagram')
 const myAnimeList = require('mal-scraper')
 const fakeId = require('fake-identity')
@@ -14,9 +15,9 @@ module.exports = class MiscManager
     moduleDescription
     commands
 
-    constructor(client)
+    constructor()
     {
-        this.client = client
+        this.client = index.client
         this.moduleName = "Misc"
         this.moduleDescription = "Miscellaneous commands"
         this.commands = [this.help, this.uptime, this.igprofile, this.animeinfo, this.streamanime, this.fakeidentity]
@@ -114,5 +115,10 @@ module.exports = class MiscManager
         index.server.start(6969, streamInfo)
 
         message.reply('Stream started at http://quicksense.ddns.net:6969')
+    }
+
+    version(message, info)
+    {
+        message.reply(`WhatsappBOT ${config.version}`)
     }
 }

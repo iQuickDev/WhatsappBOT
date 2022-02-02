@@ -21,6 +21,8 @@ const client = new Client({
     session: session
 })
 
+exports.client = client
+
 const Server = new ServerManager()
 exports.server = Server
 
