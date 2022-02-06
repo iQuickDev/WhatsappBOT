@@ -107,7 +107,7 @@ module.exports = class NSFWManager
             cockSize += parseInt(phoneNumber[i])
         }
     
-        cockSize = Math.floor((cockSize * parseInt(phoneNumber[phoneNumber.length -1]) / ((parseInt(phoneNumber[1]) + 3) * 3)))
+        cockSize = Math.ceil((cockSize * parseInt(phoneNumber[phoneNumber.length -1]) / ((parseInt(phoneNumber[1]) + 3) * 3)))
 
         let cockString = '8'
 
