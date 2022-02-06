@@ -1,3 +1,5 @@
+const index = require('../index.js')
+
 module.exports = class GameManager
 {
     client
@@ -6,9 +8,9 @@ module.exports = class GameManager
     commands
     games
 
-    constructor(client)
+    constructor()
     {
-        this.client = client
+        this.client = index.client
         this.moduleName = "Games"
         this.moduleDescription = "Game related commands"
         this.commands = [this.hangman, this.tictactoe, this.guessthenumber]

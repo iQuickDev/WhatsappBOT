@@ -1,4 +1,4 @@
-const index = require('./index.js')
+const index = require('../index.js')
 
 module.exports = class AdminManager
 {
@@ -7,9 +7,9 @@ module.exports = class AdminManager
     moduleDescription
     commands
 
-    constructor(client)
+    constructor()
     {
-        this.client = client
+        this.client = index.client
         this.moduleName = "Admin"
         this.moduleDescription = "Administrator reserved commands"
         this.commands = [this.eval, this.purge, this.massmention]

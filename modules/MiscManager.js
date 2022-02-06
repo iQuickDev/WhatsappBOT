@@ -1,5 +1,5 @@
-const index = require('./index.js')
-const config = require('./config.json')
+const index = require('../index.js')
+const config = require('../config.json')
 const igScraper = require('scraper-instagram')
 const myAnimeList = require('mal-scraper')
 const fakeId = require('fake-identity')
@@ -20,7 +20,7 @@ module.exports = class MiscManager
         this.client = index.client
         this.moduleName = "Misc"
         this.moduleDescription = "Miscellaneous commands"
-        this.commands = [this.help, this.uptime, this.igprofile, this.animeinfo, this.streamanime, this.fakeidentity]
+        this.commands = [this.help, this.uptime, this.igprofile, this.animeinfo, this.streamanime, this.fakeidentity, this.version]
         console.log("MiscManager loaded!")
     }
 

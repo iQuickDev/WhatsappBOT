@@ -18,6 +18,7 @@
     "jsdom": "^19.0.0",
     "jwplayer-scraper": "^1.2.0",
     "mal-scraper": "^2.11.4",
+    "moment": "^2.29.1",
     "npm": "^8.3.2",
     "puppeteer": "^13.1.2",
     "qrcode-terminal": "^0.12.0",

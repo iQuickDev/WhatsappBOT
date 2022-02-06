@@ -4,6 +4,7 @@ const wikifeet = require('wikifeet-js')
 const pornhub = require('@justalk/pornhub-api')
 const waifu = require("waifu.pics.js")
 const { MessageMedia } = require('whatsapp-web.js')
+const index = require('../index.js')
 
 module.exports = class NSFWManager
 {
@@ -12,9 +13,9 @@ module.exports = class NSFWManager
     moduleDescription
     commands
 
-    constructor(client)
+    constructor()
     {
-        this.client = client
+        this.client = index.client
         this.moduleName = "NSFW"
         this.moduleDescription = "Explicit content"
         this.commands = [this.pornhub, this.r34, this.feet, this.waifu, this.cocksize]
@@ -25,7 +26,6 @@ module.exports = class NSFWManager
     {
         let videos = await pornhub.search(info.args[0])
         let randomVideo = videos.results[Randomizer(videos.results.length)]
-        console.log(randomVideo)
         message.reply(`*Title*: ${randomVideo.title}\n*Author:* ${randomVideo.author}\n*Views*: ${Math.round(randomVideo.views)}\n*URL*: ${randomVideo.link}`)
     }
 
@@ -107,7 +107,7 @@ module.exports = class NSFWManager
             cockSize += parseInt(phoneNumber[i])
         }
     
-        cockSize = (cockSize * parseInt(phoneNumber[phoneNumber.length -1]) / ((parseInt(phoneNumber[1]) + 3) * 3))
+        cockSize = Math.floor((cockSize * parseInt(phoneNumber[phoneNumber.length -1]) / ((parseInt(phoneNumber[1]) + 3) * 3)))
 
         let cockString = '8'
 

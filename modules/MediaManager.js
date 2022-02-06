@@ -1,3 +1,5 @@
+const index = require('../index.js')
+
 module.exports = class MediaManager
 {
     client
@@ -5,13 +7,11 @@ module.exports = class MediaManager
     moduleDescription
     commands
 
-    constructor(client)
+    constructor()
     {
-        this.client = client
+        this.client = index.client
         this.moduleName = "Media"
         this.moduleDescription = "Video/Audio related commands"
         this.commands = []
     }
-
-    
 }
