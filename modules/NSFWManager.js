@@ -5,6 +5,7 @@ const pornhub = require('@justalk/pornhub-api')
 const waifu = require("waifu.pics.js")
 const { MessageMedia } = require('whatsapp-web.js')
 const index = require('../index.js')
+const blasphemyPhrases = require('../blasphemy.json')
 
 module.exports = class NSFWManager
 {
@@ -18,7 +19,7 @@ module.exports = class NSFWManager
         this.client = index.client
         this.moduleName = "NSFW"
         this.moduleDescription = "Explicit content"
-        this.commands = [this.pornhub, this.r34, this.feet, this.waifu, this.cocksize]
+        this.commands = [this.pornhub, this.r34, this.feet, this.waifu, this.cocksize, this.blasphemy]
         console.log("NSFWManager loaded!")
     }
 
@@ -118,6 +119,24 @@ module.exports = class NSFWManager
         cockString += 'D'
 
         message.reply(`Your cock looks like this:\n${cockString}`)
+    }
+
+    blasphemy(message, info)
+    {
+        if (Randomizer(25) == 20)
+        {
+            message.reply(blasphemyPhrases.specials[Randomizer(blasphemyPhrases.specials.length - 1)])
+            return
+        }
+
+        if (Randomizer(2))
+        {
+            message.reply(`${blasphemyPhrases.males[Randomizer(blasphemyPhrases.males.length - 1)]} ${blasphemyPhrases.male_words[Randomizer(blasphemyPhrases.male_words.length - 1)]}`)
+        }
+        else
+        {
+            message.reply(`${blasphemyPhrases.females[Randomizer(blasphemyPhrases.males.length - 1)]} ${blasphemyPhrases.female_words[Randomizer(blasphemyPhrases.female_words.length - 1)]}` )
+        }
     }
 }
 

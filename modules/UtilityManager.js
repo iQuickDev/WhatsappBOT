@@ -81,8 +81,6 @@ module.exports = class UtilityManager
         let day = args[1] == null ? currentDate.toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase() : args[1]
         let timeNow = moment(args[2], 'HH:mm').isValid() ? moment(args[2], 'HH:mm') : moment(timestamp, 'HH:mm')
 
-        console.log(day, timeNow)
-
         if (day == 'saturday' || day == 'sunday')
         {
             message.reply(`The school is closed on ${day}`)
@@ -123,7 +121,10 @@ module.exports = class UtilityManager
 
         for (let i = 0; i < schedule.it.length; i++) // list all subjects in that day
         {
-            result += `[${i + 1}] ${schedule[classType][i].subjects[day]}\n`
+            if (schedule[classType][i].subjects[day] != null)
+            result += `[${i + 1}°] (${schedule[classType][i].range}) ${schedule[classType][i].subjects[day]}\n`
+            if (i == 2 || i == 4)
+            result += `----- INTERVALLO -----\n`
         }
 
         result = result.replaceAll('undefined', '/')
