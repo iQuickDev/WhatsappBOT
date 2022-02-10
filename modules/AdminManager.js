@@ -1,4 +1,6 @@
 const index = require('../index.js')
+const config = require('../config.json')
+const { exec } = require('child_process')
 
 module.exports = class AdminManager
 {
@@ -12,7 +14,7 @@ module.exports = class AdminManager
         this.client = index.client
         this.moduleName = "Admin"
         this.moduleDescription = "Administrator reserved commands"
-        this.commands = [this.eval, this.purge, this.massmention]
+        this.commands = [this.eval, this.purge, this.massmention, this.update]
         console.log("AdminManager loaded!")
     }
 
@@ -73,4 +75,29 @@ module.exports = class AdminManager
         else
         message.reply("Only administrators are allowed to use this command!")
     }
+
+    update(message, info)
+    {
+        if (message.fromMe)
+        {
+            message.reply(`Update started, current version: ${config.version}`)
+            exec("git pull && npm install && pm2 restart all", (error, stdout, stderr) =>
+            {
+                if (error)
+                {
+                    message.reply(error)
+                    return
+                }
+                if (stderr)
+                {
+                    message.reply(stderr)
+                    return
+                }
+                message.reply(stdout)
+            })
+        }
+        else
+        message.reply("Only administrators are allowed to use this command!")
+    }
+
 }

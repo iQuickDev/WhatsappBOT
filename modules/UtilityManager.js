@@ -75,6 +75,7 @@ module.exports = class UtilityManager
         let currentDate = new Date()
         let timestamp = `${currentDate.getHours().toString().length < 2 ? '0' + currentDate.getHours().toString() : currentDate.getHours().toString()}:${currentDate.getMinutes().toString().length < 2 ? '0' + currentDate.getMinutes().toString() : currentDate.getMinutes().toString()}`
         let ranges = []
+        let timeLeft = new moment()
 
         let args = info.args[0].split(' ')
         let classType = args[0]
@@ -102,18 +103,22 @@ module.exports = class UtilityManager
             return
         }
 
-        result += `*${day}*\n`.toUpperCase()
+        result += `*${day}*\n\n`.toUpperCase()
 
-        for (let i = 0; i < schedule.it.length; i++) // previous, current and next subject
+        for (let i = 0; i < schedule.it.length; i++) // previous, current, next subject and time left till end of class
         {
             if (timeNow.isBetween(ranges[i].start, ranges[i].end))
             {
+                timeLeft = moment(ranges[i].end).diff(timeNow, 'minutes')
+
                 if (i == 0)
                 result += `Previous: /\nCurrent: ${schedule[classType][i].subjects[day]}\nNext: ${schedule[classType][i + 1].subjects[day]}`
                 else if (i > 0 && i < schedule.it.length)
                 result += `Previous: ${schedule[classType][i - 1].subjects[day]}\nCurrent: ${schedule[classType][i].subjects[day]}\nNext: ${schedule[classType][i + 1].subjects[day]}`
                 else
                 result += `Previous: ${schedule[classType][i - 1].subjects[day]}\nCurrent: ${schedule[classType][i].subjects[day]}\nNext: /`
+
+                result += `\n\n*Time till next class*: ${timeLeft} minutes\n`
             }
         }
 
