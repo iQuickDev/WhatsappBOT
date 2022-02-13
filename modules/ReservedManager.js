@@ -1,5 +1,6 @@
 const index = require('../index.js')
 const {exec} = require('child_process')
+const config = require('../config.json')
 
 module.exports = class ReservedManager
 {
