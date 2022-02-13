@@ -1,5 +1,6 @@
 const index = require('../index.js')
 const config = require('../config.json')
+const sandwiches = require('../sandwiches.json')
 
 module.exports = class AdminManager
 {
@@ -13,7 +14,7 @@ module.exports = class AdminManager
         this.client = index.client
         this.moduleName = "Admin"
         this.moduleDescription = "Administrator reserved commands"
-        this.commands = [this.purge, this.massmention, this.renamegroup, this.mutegroup, this.unmutegroup, this.allowpermissions, this.restrictpermissions, this.invite]
+        this.commands = [this.purge, this.massmention, this.renamegroup, this.mutegroup, this.unmutegroup, this.allowpermissions, this.restrictpermissions, this.invite, this.clearpanini]
         console.log("AdminManager loaded!")
     }
 
@@ -176,6 +177,21 @@ module.exports = class AdminManager
         }
         else
         message.reply(`Only administrators are allowed to use this command!`)
+    }
+
+    clearpanini(message, info)
+    {
+        if (isAdmin(message))
+        {
+            for (const sandwich of sandwiches.orders)
+            {
+                sandwich.quantity = 0
+            }
+
+            message.reply("Panini list has been cleared")
+        }
+        else
+        message.reply("Only administrators are allowed to use this command!")
     }
 }
 

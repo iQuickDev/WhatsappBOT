@@ -1,0 +1,120 @@
+{
+    "list": [
+        {
+            "name": "aggressivo",
+            "price": 2
+        },
+        {
+            "name": "crf",
+            "price": 2
+        },
+        {
+            "name": "tonno",
+            "price": 2
+        },
+        {
+            "name": "tonnone",
+            "price": 2.20
+        },
+        {
+            "name": "tacchino",
+            "price": 2.20
+        },
+        {
+            "name": "tacchinone",
+            "price": 2.20
+        },
+        {
+            "name": "mix",
+            "price": 2
+        },
+        {
+            "name": "delicato",
+            "price": 2
+        },
+        {
+            "name": "pancetta",
+            "price": 2
+        },
+        {
+            "name": "pancetta e fontina",
+            "price": 2
+        },
+        {
+            "name": "crudo e stracchino",
+            "price": 2
+        },
+        {
+            "name": "cotto e fontina",
+            "price": 2
+        },
+        {
+            "name": "milano",
+            "price": 2
+        },
+        {
+            "name": "nutellino",
+            "price": 1.10
+        }
+    ],
+
+    "orders":
+    [
+        {
+            "name": "aggressivo",
+            "quantity": 0
+        },
+        {
+            "name": "crf",
+            "quantity": 0
+        },
+        {
+            "name": "tonno",
+            "quantity": 0
+        },
+        {
+            "name": "tonnone",
+            "quantity": 0
+        },
+        {
+            "name": "tacchino",
+            "quantity": 0
+        },
+        {
+            "name": "tacchinone",
+            "quantity": 0
+        },
+        {
+            "name": "mix",
+            "quantity": 0
+        },
+        {
+            "name": "delicato",
+            "quantity": 0
+        },
+        {
+            "name": "pancetta",
+            "quantity": 0
+        },
+        {
+            "name": "pancetta e fontina",
+            "quantity": 0
+        },
+        {
+            "name": "crudo e stracchino",
+            "quantity": 0
+        },
+        {
+            "name": "cotto e fontina",
+            "quantity": 0
+        },
+        {
+            "name": "milano",
+            "quantity": 0
+        },
+        {
+            "name": "nutellino",
+            "quantity": 0
+        }
+    ]
+}

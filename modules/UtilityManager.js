@@ -2,6 +2,8 @@ const request = require('request')
 const moment = require('moment')
 const schedule = require('../schedule.json')
 const index = require('../index.js')
+const sandwiches = require('../sandwiches.json')
+const FileSystem = require('fs')
 
 module.exports = class UtilityManager
 {
@@ -15,7 +17,7 @@ module.exports = class UtilityManager
         this.client = index.client
         this.moduleName = "Utility"
         this.moduleDescription = "Useful commands"
-        this.commands = [this.decimaltobinary, this.binarytodecimal, this.decimaltohex, this.hextodecimal, this.asciitodecimal, this.decimaltoascii, this.getrequest, this.covid, this.schedule]
+        this.commands = [this.decimaltobinary, this.binarytodecimal, this.decimaltohex, this.hextodecimal, this.asciitodecimal, this.decimaltoascii, this.getrequest, this.covid, this.schedule, this.panino, this.panini]
         console.log("UtilityManager loaded!")
     }
 
@@ -136,4 +138,49 @@ module.exports = class UtilityManager
 
         message.reply(result)
     }
+
+    panino(message, info)
+    {
+        for (const sandwich of sandwiches.orders)
+        {
+            if (sandwich.name == info.args[0])
+            {
+                sandwich.quantity++
+            }
+        }
+    }
+
+    panini(message, info)
+    {
+        let total = 0
+        let sandwichesString = new String('*LISTA PANINI*\n')
+
+        for (const sandwich of sandwiches.list)
+        {
+            sandwichesString += `${sandwich.name} - ${sandwich.price} €\n`
+        }
+
+        sandwichesString += `\n*ORDINI*\n`
+
+        for (const sandwichorder of sandwiches.orders)
+        {
+            if (sandwichorder.quantity > 0)
+            {
+                sandwichesString += `${sandwichorder.quantity}x ${sandwichorder.name}`
+                for (const sandwich of sandwiches.list)
+                {
+                    if (sandwich.name == sandwichorder.name)
+                    {
+                        sandwichesString += ` - ${sandwich.price * sandwichorder.quantity} €\n`
+                        total += (sandwich.price * sandwichorder.quantity)
+                    }
+                }
+            }
+        }
+
+        sandwichesString += `\n*TOTALE*: ${total.toFixed(2)} €`
+
+        message.reply(sandwichesString)
+    }
+
 }
