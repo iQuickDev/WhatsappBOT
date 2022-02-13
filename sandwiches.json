@@ -55,6 +55,10 @@
         {
             "name": "nutellino",
             "price": 1.10
+        },
+        {
+            "name": "coca cola",
+            "price": 1
         }
     ],
 
@@ -114,6 +118,10 @@
         },
         {
             "name": "nutellino",
+            "quantity": 0
+        },
+        {
+            "name": "coca cola",
             "quantity": 0
         }
     ]
