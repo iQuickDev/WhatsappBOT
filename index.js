@@ -5,6 +5,8 @@ const MiscManager = require('./modules/MiscManager.js')
 const GameManager = require('./modules/GameManager.js')
 const ServerManager = require('./modules/ServerManager.js')
 const UtilityManager = require('./modules/UtilityManager.js')
+const MediaManager = require('./modules/MediaManager.js')
+const ReservedManager = require('./modules/ReservedManager.js')
 const FileSystem = require('fs')
 const QRCode = require('qrcode-terminal')
 const config = require('./config.json')
@@ -29,13 +31,15 @@ exports.server = Server
 var modules = []
 exports.modules = modules
 
-const NSFW = new NSFWManager(client)
-const Admin = new AdminManager(client)
-const Misc = new MiscManager(client)
-const Utility = new UtilityManager(client)
-//const Game = new GameManager(client)
+const NSFW = new NSFWManager()
+const Admin = new AdminManager()
+const Misc = new MiscManager()
+const Utility = new UtilityManager()
+const Media = new MediaManager()
+const Reserved = new ReservedManager()
+//const Game = new GameManager()
 
-modules.push(NSFW, Admin, Misc, Utility, /*Game*/)
+modules.push(NSFW, Admin, Misc, Utility, Media, Reserved, /*Game*/)
 
 client.on('qr', (qr) => QRCode.generate(qr, { small: true }))
 

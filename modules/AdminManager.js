@@ -1,6 +1,5 @@
 const index = require('../index.js')
 const config = require('../config.json')
-const { exec } = require('child_process')
 
 module.exports = class AdminManager
 {
@@ -14,34 +13,19 @@ module.exports = class AdminManager
         this.client = index.client
         this.moduleName = "Admin"
         this.moduleDescription = "Administrator reserved commands"
-        this.commands = [this.eval, this.purge, this.massmention, this.update]
+        this.commands = [this.purge, this.massmention, this.renamegroup, this.mutegroup, this.unmutegroup, this.allowpermissions, this.restrictpermissions, this.invite]
         console.log("AdminManager loaded!")
     }
 
-    eval(message, info)
+    async purge(message, info)
     {
-        if (message.fromMe)
+        if (isAdmin(message))
         {
-            try
-            {
-                message.reply(eval(info.args[0]).toString())
-                return
-            }
-            catch (error) { message.reply(error.toString()) }
-        }
-        else
-        message.reply("Only administrators are allowed to use this command!")
-    }
-
-    purge(message, info)
-    {
-        if (message.fromMe)
-        {
-            let purgeString
+            let purgeString = new String('\n')
             
-            for (let i = 0; i < 100; i++)
+            for (let i = 0; i < 6; i++)
             {
-                purgeString += '\n'
+                purgeString += purgeString
             }
 
             message.reply(purgeString)
@@ -52,7 +36,7 @@ module.exports = class AdminManager
 
     async massmention(message, info)
     {
-        if (message.fromMe)
+        if (isAdmin(message))
         {
             let chat = await message.getChat()
             let mentions = []
@@ -76,28 +60,141 @@ module.exports = class AdminManager
         message.reply("Only administrators are allowed to use this command!")
     }
 
-    update(message, info)
+    async renamegroup(message, info)
     {
-        if (message.fromMe)
+        if (isAdmin(message))
         {
-            message.reply(`Update started, current version: ${config.version}`)
-            exec("git pull && npm install && pm2 restart all", (error, stdout, stderr) =>
+            let chat = await message.getChat()
+
+            if (chat.isGroup)
             {
-                if (error)
+                try
+                {
+                    chat.setSubject(info.args[0])
+                    message.reply(`Chat has been renamed to *${info.args[0]}*`)
+                }
+                catch (error)
                 {
                     message.reply(error)
-                    return
                 }
-                if (stderr)
-                {
-                    message.reply(stderr)
-                    return
-                }
-                message.reply(stdout)
-            })
+            }
+            else
+            message.reply("This command can only be used in a group")
         }
         else
-        message.reply("Only administrators are allowed to use this command!")
+        message.reply(`Only administrators are allowed to use this command!`)
     }
 
+    async setdescription(message, info)
+    {
+        if (isAdmin(message))
+        {
+            let chat = await message.getChat()
+
+            if (chat.isGroup)
+            {
+                chat.setDescription(info.args[0])
+                message.reply(`Description has been set to *${info.args[0]}*`)
+            }
+            else
+            message.reply("This command can only be used in a group")
+        }
+        else
+        message.reply(`Only administrators are allowed to use this command!`)
+    }
+
+    async invite(message, info)
+    {
+        if (isAdmin(message))
+        {
+            let chat = await message.getChat()
+
+            if (chat.isGroup)
+            {
+                chat.getInviteCode().then(code => message.reply(`https://chat.whatsapp.com/${code}`))
+            }
+        }
+        else
+        message.reply(`Only administrators are allowed to use this command!`)
+    }
+
+    async restrictpermissions(message, info)
+    {
+        if (isAdmin(message))
+        {
+            let chat = await message.getChat()
+
+            if (chat.isGroup)
+            {
+                chat.setInfoAdminsOnly(true)
+            }
+        }
+        else
+        message.reply(`Only administrators are allowed to use this command!`)
+    }
+
+    async allowpermissions(message, info)
+    {
+        if (isAdmin(message))
+        {
+            let chat = await message.getChat()
+
+            if (chat.isGroup)
+            {
+                chat.setInfoAdminsOnly(false)
+            }
+        }
+        else
+        message.reply(`Only administrators are allowed to use this command!`)
+    }
+
+    async mutegroup(message, info)
+    {
+        if (isAdmin(message))
+        {
+            let chat = await message.getChat()
+
+            if (chat.isGroup)
+            {
+                chat.setMessagesAdminsOnly(true)
+            }
+        }
+        else
+        message.reply(`Only administrators are allowed to use this command!`)
+    }
+
+    async unmutegroup(message, info)
+    {
+        if (isAdmin(message))
+        {
+            let chat = await message.getChat()
+
+            if (chat.isGroup)
+            {
+                chat.setMessagesAdminsOnly(false)
+            }
+        }
+        else
+        message.reply(`Only administrators are allowed to use this command!`)
+    }
+}
+
+async function isAdmin(message)
+{
+    let chat = await message.getChat()
+    if (chat.isGroup)
+    {
+        const authorId = message.author
+
+        for (let participant of chat.participants)
+        {
+            if (participant.id._serialized === authorId && participant.isAdmin)
+            {
+                return true
+            }
+        }
+        return false
+    }
+    else
+    return true
 }

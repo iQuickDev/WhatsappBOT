@@ -35,6 +35,10 @@ module.exports = class MiscManager
                 helpString += `${index.modules[i].commands[j].name}, `
             helpString += `\n`
         }
+
+        helpString += `\n*Syntax*: wp <command> <arguments> (optional)\n`
+        helpString += `\nWhatsappBOT ${config.version}${process.arch != 'arm' ? '-dev' : '-stable'}`
+
         message.reply(helpString)
     }
 
@@ -119,6 +123,6 @@ module.exports = class MiscManager
 
     version(message, info)
     {
-        message.reply(`WhatsappBOT ${config.version}`)
+        message.reply(`WhatsappBOT ${config.version}${process.arch != 'arm' ? '-dev' : '-stable'}`)
     }
 }

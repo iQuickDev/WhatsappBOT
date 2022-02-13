@@ -13,6 +13,7 @@
     "booru": "^2.5.3",
     "express": "^4.17.2",
     "fake-identity": "^1.0.6",
+    "hanime": "^1.2.1",
     "http-terminator": "^3.0.4",
     "i": "^0.3.7",
     "jsdom": "^19.0.0",
