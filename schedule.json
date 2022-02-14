@@ -50,8 +50,8 @@
                 "subjects":
                 {
                     "monday": "Informatica LAB",
-                    "tuesday": "Scienze Motorie",
-                    "wednesday": "Informatica",
+                    "tuesday": "Inglese",
+                    "wednesday": "Complementi Matematica",
                     "thursday": "Informatica",
                     "friday": "Storia"
                 }
@@ -62,7 +62,7 @@
                 {
                     "monday": "Informatica LAB",
                     "tuesday": "TPSIT",
-                    "wednesday": "Complementi",
+                    "wednesday": "Informatica",
                     "thursday": "Telecomunicazioni",
                     "friday": "Italiano"
                 }
@@ -72,7 +72,7 @@
                 "subjects":
                 {
                     "monday": "Religione/Alternativa",
-                    "thursday": "Inglese"
+                    "thursday": "Scienze Motorie"
                 }
             }
         ],
@@ -128,8 +128,8 @@
                 "subjects":
                 {
                     "monday": "Telecomunicazioni LAB",
-                    "tuesday": "Scienze Motorie",
-                    "wednesday": "Telecomunicazioni",
+                    "tuesday": "Inglese",
+                    "wednesday": "Complementi Matematica",
                     "thursday": "Informatica LAB",
                     "friday": "Storia"
                 }
@@ -140,7 +140,7 @@
                 {
                     "monday": "Telecomunicazioni LAB",
                     "tuesday": "TPSIT",
-                    "wednesday": "Complementi",
+                    "wednesday": "Telecomunicazioni",
                     "thursday": "Informatica LAB",
                     "friday": "Italiano"
                 }
@@ -150,7 +150,7 @@
                 "subjects":
                 {
                     "monday": "Religione/Alternativa",
-                    "thursday": "Inglese"
+                    "thursday": "Scienze Motorie"
                 }
             }
         ]
