@@ -18,7 +18,7 @@
         },
         {
             "name": "tacchino",
-            "price": 2.20
+            "price": 2
         },
         {
             "name": "tacchinone",
@@ -59,70 +59,19 @@
         {
             "name": "coca cola",
             "price": 1
+        },
+        {
+            "name": "acqua naturale",
+            "price": 0.50
+        },
+        {
+            "name": "acqua gassata",
+            "price": 0.50
         }
     ],
 
     "orders":
     [
-        {
-            "name": "aggressivo",
-            "quantity": 0
-        },
-        {
-            "name": "crf",
-            "quantity": 0
-        },
-        {
-            "name": "tonno",
-            "quantity": 0
-        },
-        {
-            "name": "tonnone",
-            "quantity": 0
-        },
-        {
-            "name": "tacchino",
-            "quantity": 0
-        },
-        {
-            "name": "tacchinone",
-            "quantity": 0
-        },
-        {
-            "name": "mix",
-            "quantity": 0
-        },
-        {
-            "name": "delicato",
-            "quantity": 0
-        },
-        {
-            "name": "pancetta",
-            "quantity": 0
-        },
-        {
-            "name": "pancetta e fontina",
-            "quantity": 0
-        },
-        {
-            "name": "crudo e stracchino",
-            "quantity": 0
-        },
-        {
-            "name": "cotto e fontina",
-            "quantity": 0
-        },
-        {
-            "name": "milano",
-            "quantity": 0
-        },
-        {
-            "name": "nutellino",
-            "quantity": 0
-        },
-        {
-            "name": "coca cola",
-            "quantity": 0
-        }
+
     ]
 }

@@ -3,7 +3,6 @@ const moment = require('moment')
 const schedule = require('../schedule.json')
 const index = require('../index.js')
 const sandwiches = require('../sandwiches.json')
-const FileSystem = require('fs')
 
 module.exports = class UtilityManager
 {
@@ -17,7 +16,7 @@ module.exports = class UtilityManager
         this.client = index.client
         this.moduleName = "Utility"
         this.moduleDescription = "Useful commands"
-        this.commands = [this.decimaltobinary, this.binarytodecimal, this.decimaltohex, this.hextodecimal, this.asciitodecimal, this.decimaltoascii, this.getrequest, this.covid, this.schedule, this.panino, this.panini]
+        this.commands = [this.decimaltobinary, this.binarytodecimal, this.decimaltohex, this.hextodecimal, this.asciitodecimal, this.decimaltoascii, this.getrequest, this.covid, this.schedule, this.panini, this.panino]
         console.log("UtilityManager loaded!")
     }
 
@@ -139,48 +138,116 @@ module.exports = class UtilityManager
         message.reply(result)
     }
 
-    panino(message, info)
+    async panino(message, info)
     {
-        for (const sandwich of sandwiches.orders)
+        if (info.args[0] == '')
         {
-            if (sandwich.name == info.args[0])
+            message.reply(`*Syntax*: wp panino <name>,<alternative> <paid money> (alternatives are unlimited)\n*Example*: wp panino crf,tonno 3`)
+            return
+        }
+
+        let args = info.args[0].split(',')
+        let sandwichNames = new Array()
+        let givenMoney = 0
+        let change = 0
+        let author = await message.getContact()
+
+        for (let i = 0; i < args.length; i++)
+        {
+            sandwichNames.push(args[i].replace(/[ 0-9]/g, '').toLowerCase())
+        }
+
+        console.log(sandwichNames)
+
+        try
+        {
+            givenMoney = info.args[0].match(/\d+/g)[0]
+        }
+        catch (error)
+        {
+            givenMoney = sandwiches.list.find(x => x.name == sandwichNames[0]).price
+        }
+
+        try
+        {
+            change = givenMoney - sandwiches.list.find(x => x.name == sandwichNames[0]).price
+        }
+        catch (error)
+        {
+            message.reply('*REJECTED*: Please specify a valid panino and amount of money')
+            return
+        }
+
+        let order = 
+        {
+            customer: author,
+            name: sandwichNames,
+            paid: givenMoney,
+            change: change
+        }
+
+        if (change < 0)
+        {
+            message.reply("*REJECTED*: You don't have enough money")
+            return
+        }
+        
+        for (let i = 0; i < sandwichNames.length - 1; i++)
+        {
+            if (sandwiches.list.find(x => x.name == sandwichNames[i]).price != sandwiches.list.find(x => x.name == sandwichNames[i + 1]).price)
             {
-                sandwich.quantity++
+                message.reply("*REJECTED*: your alternatives don't have the same price")
+                return
             }
         }
+
+        sandwiches.orders.push(order)
+
+        index.modules[3].panini(message, info)
     }
 
-    panini(message, info)
+    async panini(message, info)
     {
+        let chat = await message.getChat()
+        let mentions = []
         let total = 0
-        let sandwichesString = new String('*LISTA PANINI*\n')
+        let totalChange = 0
+
+        for (const participant of chat.participants)
+        {
+            const contact = await index.client.getContactById(participant.id._serialized)
+            mentions.push(contact)
+        }
+
+        let sandwichesString = new String('*PANINI LIST*\n')
 
         for (const sandwich of sandwiches.list)
         {
-            sandwichesString += `${sandwich.name} - ${sandwich.price} €\n`
+            sandwichesString += `${sandwich.name} - ${sandwich.price.toFixed(2)} €\n`
         }
 
-        sandwichesString += `\n*ORDINI*\n`
+        sandwichesString += `\n*ORDERS*\n`
 
         for (const sandwichorder of sandwiches.orders)
         {
-            if (sandwichorder.quantity > 0)
+            sandwichesString += `@${sandwichorder.customer.id.user}`
+
+            for (let i = 0; i < sandwichorder.name.length; i++)
             {
-                sandwichesString += `${sandwichorder.quantity}x ${sandwichorder.name}`
-                for (const sandwich of sandwiches.list)
-                {
-                    if (sandwich.name == sandwichorder.name)
-                    {
-                        sandwichesString += ` - ${sandwich.price * sandwichorder.quantity} €\n`
-                        total += (sandwich.price * sandwichorder.quantity)
-                    }
-                }
+                if (i == 0)
+                sandwichesString += `: ${sandwichorder.name[i].toUpperCase()}`
+                else
+                sandwichesString += ` or ${sandwichorder.name[i].toUpperCase()}`
             }
+
+            sandwichesString += `\nPaid: ${sandwichorder.paid} € | Change: ${sandwichorder.change} €\n\n`
+
+            total += sandwiches.list.find(x => x.name == sandwichorder.name[0]).price
+            totalChange += sandwichorder.change
         }
 
-        sandwichesString += `\n*TOTALE*: ${total.toFixed(2)} €`
+        sandwichesString += `\n*TOTAL*: ${total.toFixed(2)} €\n*TOTAL CHANGE*: ${totalChange.toFixed(2)} €`
 
-        message.reply(sandwichesString)
+        await chat.sendMessage(sandwichesString, { mentions })
     }
-
 }

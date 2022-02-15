@@ -183,10 +183,7 @@ module.exports = class AdminManager
     {
         if (isAdmin(message))
         {
-            for (const sandwich of sandwiches.orders)
-            {
-                sandwich.quantity = 0
-            }
+            sandwiches.orders = []
 
             message.reply("Panini list has been cleared")
         }
