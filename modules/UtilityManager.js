@@ -213,10 +213,16 @@ module.exports = class UtilityManager
         let total = 0
         let totalChange = 0
 
-        for (const participant of chat.participants)
+        for (const sandwichorder of sandwiches.orders)
         {
-            const contact = await index.client.getContactById(participant.id._serialized)
-            mentions.push(contact)
+            for (const participant of chat.participants)
+            {
+                if (sandwichorder.customer.id.user == participant.id.user)
+                {
+                    const contact = await index.client.getContactById(participant.id._serialized)
+                    mentions.push(contact)
+                }
+            }
         }
 
         let sandwichesString = new String('*PANINI LIST*\n')
