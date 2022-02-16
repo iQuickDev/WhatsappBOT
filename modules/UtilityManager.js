@@ -146,7 +146,7 @@ module.exports = class UtilityManager
             return
         }
 
-        let args = info.args[0].split(',')
+        let args = info.args[0].replaceAll(', ', ',').split(',')
         let sandwichNames = new Array()
         let givenMoney = 0
         let change = 0
