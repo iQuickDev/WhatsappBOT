@@ -196,17 +196,10 @@ async function isAdmin(message)
 {
     let chat = await message.getChat()
     let admin = false;
-    console.log(1)
-    console.log(Object.keys(chat))
     if (chat.isGroup) 
     {
-        console.log(2)
         for (let participant of chat.participants)
         {
-            console.log(participant.isAdmin)
-            console.log(participant.id._serialized)
-            console.log(message.from)
-            console.log(3)
             if (participant.isAdmin && participant.id._serialized === message.from)
             {
                 admin = true;
