@@ -195,19 +195,16 @@ module.exports = class AdminManager
 async function isAdmin(message)
 {
     let chat = await message.getChat()
-    if (chat.isGroup)
+    if (chat.isGroup) 
     {
-        const authorId = message.author
-
         for (let participant of chat.participants)
         {
-            if (participant.id._serialized === authorId && participant.isAdmin)
+            if (participant.isAdmin && participant.id._serialized === message.author)
             {
                 return true
             }
         }
         return false
     }
-    else
     return true
 }
