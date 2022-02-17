@@ -1,15 +1,55 @@
 {
     "list": [
         {
-            "name": "aggressivo",
+            "name": "tacchino",
             "price": 2
         },
         {
-            "name": "crf",
+            "name": "tacchinone",
+            "price": 2.20
+        },
+        {
+            "name": "doc",
             "price": 2
         },
         {
-            "name": "ntc",
+            "name": "pancetta e fontina",
+            "price": 2
+        },
+        {
+            "name": "salame e fontina",
+            "price": 2
+        },
+        {
+            "name": "delicato",
+            "price": 2
+        },
+        {
+            "name": "milano",
+            "price": 2
+        },
+        {
+            "name": "cotto e mozzarella",
+            "price": 2.20
+        },
+        {
+            "name": "crudo e stracchino",
+            "price": 2
+        },
+        {
+            "name": "crudo rucola e philadelphia",
+            "price": 2
+        },
+        {
+            "name": "cotto e pomodoro",
+            "price": 2
+        },
+        {
+            "name": "funghi",
+            "price": 2
+        },
+        {
+            "name": "speck e brie",
             "price": 2
         },
         {
@@ -21,19 +61,23 @@
             "price": 2.20
         },
         {
-            "name": "tacchino",
+            "name": "cotto e fontina",
             "price": 2
         },
         {
-            "name": "tacchinone",
-            "price": 2.20
-        },
-        {
-            "name": "mix",
+            "name": "caprese",
             "price": 2
         },
         {
-            "name": "delicato",
+            "name": "aggressivo",
+            "price": 2
+        },
+        {
+            "name": "prosciutto crudo",
+            "price": 2
+        },
+        {
+            "name": "salame",
             "price": 2
         },
         {
@@ -41,19 +85,23 @@
             "price": 2
         },
         {
-            "name": "pancetta e fontina",
+            "name": "mortadella",
             "price": 2
         },
         {
-            "name": "crudo e stracchino",
+            "name": "cotto e maionese",
             "price": 2
         },
         {
-            "name": "cotto e fontina",
+            "name": "crf",
             "price": 2
         },
         {
-            "name": "milano",
+            "name": "pizza",
+            "price": 2
+        },
+        {
+            "name": "mix",
             "price": 2
         },
         {
