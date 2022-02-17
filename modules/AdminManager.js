@@ -20,7 +20,7 @@ module.exports = class AdminManager
 
     async purge(message, info)
     {
-        if (isAdmin(message))
+        if (await isAdmin(message))
         {
             let purgeString = new String('\n')
             
@@ -35,9 +35,9 @@ module.exports = class AdminManager
         message.reply("Only administrators are allowed to use this command!")
     }
 
-    async massmention(message, info)
+    async massmention(message)
     {
-        if (isAdmin(message))
+        if (await isAdmin(message))
         {
             let chat = await message.getChat()
             let mentions = []
@@ -63,7 +63,7 @@ module.exports = class AdminManager
 
     async renamegroup(message, info)
     {
-        if (isAdmin(message))
+        if (await isAdmin(message))
         {
             let chat = await message.getChat()
 
@@ -88,7 +88,7 @@ module.exports = class AdminManager
 
     async setdescription(message, info)
     {
-        if (isAdmin(message))
+        if (await isAdmin(message))
         {
             let chat = await message.getChat()
 
@@ -104,9 +104,9 @@ module.exports = class AdminManager
         message.reply(`Only administrators are allowed to use this command!`)
     }
 
-    async invite(message, info)
+    async invite(message)
     {
-        if (isAdmin(message))
+        if (await isAdmin(message))
         {
             let chat = await message.getChat()
 
@@ -119,9 +119,9 @@ module.exports = class AdminManager
         message.reply(`Only administrators are allowed to use this command!`)
     }
 
-    async restrictpermissions(message, info)
+    async restrictpermissions(message)
     {
-        if (isAdmin(message))
+        if (await isAdmin(message))
         {
             let chat = await message.getChat()
 
@@ -134,9 +134,9 @@ module.exports = class AdminManager
         message.reply(`Only administrators are allowed to use this command!`)
     }
 
-    async allowpermissions(message, info)
+    async allowpermissions(message)
     {
-        if (isAdmin(message))
+        if (await isAdmin(message))
         {
             let chat = await message.getChat()
 
@@ -149,9 +149,9 @@ module.exports = class AdminManager
         message.reply(`Only administrators are allowed to use this command!`)
     }
 
-    async mutegroup(message, info)
+    async mutegroup(message)
     {
-        if (isAdmin(message))
+        if (await isAdmin(message))
         {
             let chat = await message.getChat()
 
@@ -164,9 +164,9 @@ module.exports = class AdminManager
         message.reply(`Only administrators are allowed to use this command!`)
     }
 
-    async unmutegroup(message, info)
+    async unmutegroup(message)
     {
-        if (isAdmin(message))
+        if (await isAdmin(message))
         {
             let chat = await message.getChat()
 
@@ -179,9 +179,9 @@ module.exports = class AdminManager
         message.reply(`Only administrators are allowed to use this command!`)
     }
 
-    clearpanini(message, info)
+    async clearpanini(message)
     {
-        if (isAdmin(message))
+        if (await isAdmin(message))
         {
             sandwiches.orders = []
 
@@ -195,19 +195,16 @@ module.exports = class AdminManager
 async function isAdmin(message)
 {
     let chat = await message.getChat()
-    if (chat.isGroup)
+    let admin = false;
+    if (chat.isGroup) 
     {
-        const authorId = message.author
-
         for (let participant of chat.participants)
         {
-            if (participant.id._serialized === authorId && participant.isAdmin)
+            if (participant.isAdmin && participant.id._serialized === message.from)
             {
-                return true
+                admin = true;
             }
         }
-        return false
     }
-    else
-    return true
+    return admin 
 }
