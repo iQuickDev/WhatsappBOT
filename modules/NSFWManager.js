@@ -142,5 +142,5 @@ module.exports = class NSFWManager
 
 function Randomizer(max)
 {
-    return Math.floor(Math.random() * max);
+    return Math.floor(Math.random() * max)
 }

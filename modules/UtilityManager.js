@@ -154,7 +154,7 @@ module.exports = class UtilityManager
 
         for (let i = 0; i < args.length; i++)
         {
-            sandwichNames.push(args[i].replace(/[ 0-9]/g, '').toLowerCase())
+            sandwichNames.push(args[i].replace(/ [0-9]/g, '').toLowerCase())
         }
 
         console.log(sandwichNames)
@@ -246,7 +246,7 @@ module.exports = class UtilityManager
                 sandwichesString += ` or ${sandwichorder.name[i].toUpperCase()}`
             }
 
-            sandwichesString += `\nPaid: ${sandwichorder.paid} € | Change: ${sandwichorder.change} €\n\n`
+            sandwichesString += `\nPaid: ${sandwichorder.paid} € | Change: ${sandwichorder.change.toFixed(2)} €\n\n`
 
             total += sandwiches.list.find(x => x.name == sandwichorder.name[0]).price
             totalChange += sandwichorder.change
