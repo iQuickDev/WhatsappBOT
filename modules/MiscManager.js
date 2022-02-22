@@ -89,28 +89,38 @@ module.exports = class MiscManager
     {
         if (!info.args[0])
         {
-            message.reply('Please provide a link from https://gogoplay1.com')
+            message.reply('Please provide a link from https://gogoplay1.com or https://animelove.tv')
             return
         }
 
         let link = info.args[0]
-        let title
-        let source
-
-        request(link, function (error, response, body)
-        {
-            const dom = new JSDOM(response.body)
-            title = dom.window.document.getElementsByTagName('h1').item(0).textContent
-        })
-
-        var sources = await jwPlayerScraper.getMediaSources(link)
-
-        try { source = sources[sources.length - 1].file } catch (err) { message.reply(err.toString()); return }
 
         let streamInfo =
         {
-            title: title,
-            source: source
+            title: null,
+            source: null
+        }
+
+        if (link.includes('gogoplay1.com'))
+        {
+            request(link, (error, response, body) =>
+            {
+                const dom = new JSDOM(response.body)
+                streamInfo.title = dom.window.document.getElementsByTagName('h1').item(0).textContent
+            })
+    
+            var sources = await jwPlayerScraper.getMediaSources(link)
+    
+            try { streamInfo.source = sources[sources.length - 1].file } catch (err) { message.reply(err.toString()); return }
+        }
+        else if (link.includes('animelove.tv'))
+        {
+            request(link, async (error, response, body) =>
+            {
+                const dom = new JSDOM(await response.body)
+                streamInfo.title = dom.window.document.getElementsByTagName('h1').item(0).textContent
+                streamInfo.source = dom.window.document.querySelector('source').getAttribute('src')
+            })
         }
 
         if (index.server.isRunning)
