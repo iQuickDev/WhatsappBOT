@@ -179,16 +179,21 @@ module.exports = class AdminManager
         message.reply(`Only administrators are allowed to use this command!`)
     }
 
-    async clearpanini(message)
+    async clearpanini(message, isAutomated = false)
     {
-        if (await isAdmin(message))
+        if (!isAutomated)
         {
-            sandwiches.orders = []
-
-            message.reply("Panini list has been cleared")
+            if (await isAdmin(message))
+            {
+                sandwiches.orders = []
+    
+                message.reply("Panini list has been cleared")
+            }
+            else
+            message.reply("Only administrators are allowed to use this command!")
         }
         else
-        message.reply("Only administrators are allowed to use this command!")
+        sandwiches.orders = []
     }
 }
 

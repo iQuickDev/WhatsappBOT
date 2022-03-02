@@ -7,6 +7,7 @@ const ServerManager = require('./modules/ServerManager.js')
 const UtilityManager = require('./modules/UtilityManager.js')
 const MediaManager = require('./modules/MediaManager.js')
 const ReservedManager = require('./modules/ReservedManager.js')
+const scheduler = require('node-schedule')
 const FileSystem = require('fs')
 const QRCode = require('qrcode-terminal')
 const config = require('./config.json')
@@ -59,6 +60,13 @@ client.on('message_create', message =>
 })
 
 client.initialize()
+
+scheduler.scheduleJob('1 0 * * * *', async () =>
+{
+    modules[modules.indexOf(Admin)].clearpanini(null, true) // clearpanini
+    client.sendMessage('393914783047-1599835416@g.us', modules[modules.indexOf(Utility)].schedule(null, {args: ['i']}, true)) // it
+    client.sendMessage('393776703932-1600426162@g.us', modules[modules.indexOf(Utility)].schedule(null, {args: ['t']}, true)) // telecom
+})
 
 async function parseMessage(message)
 {

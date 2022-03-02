@@ -70,7 +70,7 @@ module.exports = class UtilityManager
         })
     }
 
-    schedule(message, info)
+    schedule(message, info, isAutomatic = false)
     {
         let result = new String()
         let currentDate = new Date()
@@ -135,6 +135,9 @@ module.exports = class UtilityManager
 
         result = result.replaceAll('undefined', '/')
 
+        if (isAutomatic)
+        return result
+        else
         message.reply(result)
     }
 
