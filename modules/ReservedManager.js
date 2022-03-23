@@ -38,7 +38,7 @@ module.exports = class ReservedManager
         if (isDev(message))
         {
             message.reply(`Update started, current version: ${config.version}`)
-            exec("git pull && npm install && pm2 restart all", (error, stdout, stderr) =>
+            exec("git stash && git stash drop && git pull && npm install && pm2 restart all", (error, stdout, stderr) =>
             {
                 if (error)
                 {

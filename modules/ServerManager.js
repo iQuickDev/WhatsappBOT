@@ -22,7 +22,7 @@ module.exports = class ServerManager
 
         if (!this.isRunning)
         {
-            this.app.listen(this.port, () => console.log(`ServerManager is listening on port ${port}`))
+            this.app.listen(this.port, () => console.log(`HTTP server started on port ${port}`))
             this.isRunning = true
         }
     }

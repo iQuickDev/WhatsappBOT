@@ -27,7 +27,7 @@
     "request": "^2.88.2",
     "scraper-instagram": "^1.0.17",
     "waifu.pics.js": "^0.0.5",
-    "whatsapp-web.js": "^1.15.8",
+    "whatsapp-web.js": "^1.16.4",
     "wikifeet-js": "^1.0.0"
   }
 }

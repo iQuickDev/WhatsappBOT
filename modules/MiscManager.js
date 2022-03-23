@@ -126,7 +126,7 @@ module.exports = class MiscManager
         if (index.server.isRunning)
         index.server.updateStream(streamInfo)
         else
-        index.server.start(80, streamInfo)
+        index.server.start(6969, streamInfo)
 
         message.reply('Stream started at http://quicksense.ddns.net:6969')
     }

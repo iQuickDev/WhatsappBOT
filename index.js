@@ -1,4 +1,4 @@
-const { Client } = require('whatsapp-web.js')
+const { Client, LegacySessionAuth } = require('whatsapp-web.js')
 const NSFWManager = require("./modules/NSFWManager.js")
 const AdminManager = require("./modules/AdminManager.js")
 const MiscManager = require('./modules/MiscManager.js')
@@ -21,7 +21,9 @@ try
 } catch (error) { console.log('No session found, please login') }
 
 const client = new Client({
-    session: session
+    authStrategy: new LegacySessionAuth({
+        session: session
+    })
 })
 
 exports.client = client
