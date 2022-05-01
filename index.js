@@ -1,4 +1,4 @@
-const { Client, LegacySessionAuth } = require('whatsapp-web.js')
+const { Client, LocalAuth } = require('whatsapp-web.js')
 const NSFWManager = require("./modules/NSFWManager.js")
 const AdminManager = require("./modules/AdminManager.js")
 const MiscManager = require('./modules/MiscManager.js')
@@ -8,22 +8,11 @@ const UtilityManager = require('./modules/UtilityManager.js')
 const MediaManager = require('./modules/MediaManager.js')
 const ReservedManager = require('./modules/ReservedManager.js')
 const scheduler = require('node-schedule')
-const FileSystem = require('fs')
 const QRCode = require('qrcode-terminal')
 const config = require('./config.json')
 
-let session = null
-
-try
-{
-    session = JSON.parse(FileSystem.readFileSync('./session.json'))
-    console.log('Session recovered successfully!')
-} catch (error) { console.log('No session found, please login') }
-
 const client = new Client({
-    authStrategy: new LegacySessionAuth({
-        session: session
-    })
+    authStrategy: new LocalAuth()
 })
 
 exports.client = client
@@ -49,11 +38,6 @@ client.on('qr', (qr) => QRCode.generate(qr, { small: true }))
 client.on('ready', () =>
 {
     console.log("Successfully logged in!")
-})
-
-client.on('authenticated', (session) =>
-{
-    FileSystem.writeFileSync('./session.json', JSON.stringify(session, null, 2))
 })
 
 client.on('message_create', message =>
