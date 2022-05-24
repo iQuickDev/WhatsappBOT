@@ -12,7 +12,8 @@ const QRCode = require('qrcode-terminal')
 const config = require('./config.json')
 
 const client = new Client({
-    authStrategy: new LocalAuth()
+    authStrategy: new LocalAuth(),
+    puppeteer: { handleSIGINT: false}
 })
 
 exports.client = client
@@ -110,3 +111,9 @@ async function parseMessage(message)
         }
     }
 }
+
+process.on('SIGINT', async () => {
+    console.log('\n[SIGINT] Quitting...');
+    await this.client.destroy();
+    process.exit(0);
+});
