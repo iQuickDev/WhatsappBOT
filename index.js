@@ -1,19 +1,21 @@
 const { Client, LocalAuth } = require('whatsapp-web.js')
-const NSFWManager = require("./modules/NSFWManager.js")
-const AdminManager = require("./modules/AdminManager.js")
-const MiscManager = require('./modules/MiscManager.js')
-const GameManager = require('./modules/GameManager.js')
+const fs = require('fs')
 const ServerManager = require('./modules/ServerManager.js')
-const UtilityManager = require('./modules/UtilityManager.js')
-const MediaManager = require('./modules/MediaManager.js')
-const ReservedManager = require('./modules/ReservedManager.js')
 const scheduler = require('node-schedule')
 const QRCode = require('qrcode-terminal')
 const config = require('./config.json')
+let commands = []
+// dynamically import all commands
+fs.readdirSync('./commands').filter(file => file.endsWith('.js')).forEach((file) => {
+    let cmd = require('./commands/' + file)
+    commands.push(cmd)
+})
+
+exports.commands = commands
 
 const client = new Client({
     authStrategy: new LocalAuth(),
-    puppeteer: { handleSIGINT: false}
+    puppeteer: { handleSIGINT: false }
 })
 
 exports.client = client
@@ -21,28 +23,13 @@ exports.client = client
 const Server = new ServerManager()
 exports.server = Server
 
-var modules = []
-exports.modules = modules
-
-const NSFW = new NSFWManager()
-const Admin = new AdminManager()
-const Misc = new MiscManager()
-const Utility = new UtilityManager()
-const Media = new MediaManager()
-const Reserved = new ReservedManager()
-//const Game = new GameManager()
-
-modules.push(NSFW, Admin, Misc, Utility, Media, Reserved, /*Game*/)
-
 client.on('qr', (qr) => QRCode.generate(qr, { small: true }))
 
-client.on('ready', () =>
-{
+client.on('ready', () => {
     console.log("Successfully logged in!")
 })
 
-client.on('message_create', message =>
-{
+client.on('message_create', message => {
     parseMessage(message)
 })
 
@@ -55,8 +42,7 @@ client.initialize()
 //     client.sendMessage('393776703932-1600426162@g.us', modules[modules.indexOf(Utility)].schedule(null, {args: ['t']}, true)) // telecom
 // })
 
-async function parseMessage(message)
-{
+async function parseMessage(message) {
     let info =
     {
         isInGroup: false,
@@ -72,8 +58,7 @@ async function parseMessage(message)
         }
     }
 
-    if (message.body.toLowerCase().startsWith(`${config.prefix} `))
-    {
+    if (message.body.toLowerCase().startsWith(`${config.prefix} `)) {
         info.isCommand = true
         info.command.name = message.body.substring(config.prefix.length).split(" ")[1]
         info.command.args.push(message.body.substring(config.prefix.length + info.command.name.length + 2))
@@ -85,10 +70,8 @@ async function parseMessage(message)
     info.sender = message.from
     info.content = message.body
 
-    await message.getChat().then(chat =>
-    {
-        if (chat.isGroup)
-        {
+    message.getChat().then(chat => {
+        if (chat.isGroup) {
             info.isInGroup = true
             info.group = chat.name
         }
@@ -96,24 +79,18 @@ async function parseMessage(message)
 
     console.log(info)
 
-    if (info.isCommand)
-    {
-        for (let i = 0; i < modules.length; i++)
-        {
-            for (let j = 0; j < modules[i].commands.length; j++)
-            {
-                if (info.command.name == modules[i].commands[j].name)
-                {
-                    modules[i].commands[j](message, info.command)
-                    return
-                }
-            }
+    if (info.isCommand) {
+        try {
+            commands.find(cmd => cmd.name == info.command.name).execute(message, info.command)
+        }
+        catch (error) {
+            message.reply(error)
         }
     }
 }
 
 process.on('SIGINT', async () => {
-    console.log('\n[SIGINT] Quitting...');
-    await this.client.destroy();
-    process.exit(0);
-});
+    console.log('\n[SIGINT] Quitting...')
+    await this.client.destroy()
+    process.exit(0)
+})

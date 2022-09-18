@@ -4,7 +4,7 @@ let duration = document.querySelector('#animeduration')
 let viewers = document.querySelector('#animeviewers')
 let video = document.querySelector('#animecontent')
 
-let address = 'http://quicksense.ddns.net'//"https://quicksense.ddns.net"
+let address = 'http://iquickdev.ddns.net'//"https://iquickdev.ddns.net"
 let previousSource
 let port = 6969
 
