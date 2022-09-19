@@ -6,16 +6,19 @@ const QRCode = require('qrcode-terminal')
 const config = require('./config.json')
 let commands = []
 // dynamically import all commands
-fs.readdirSync('./commands').filter(file => file.endsWith('.js')).forEach((file) => {
-    let cmd = require('./commands/' + file)
-    commands.push(cmd)
-})
+fs.readdirSync('./commands')
+	.filter((file) => file.endsWith('.js'))
+	.forEach((file) => {
+		let cmd = require('./commands/' + file)
+		commands.push(cmd)
+		console.info(`${file} was loaded`)
+	})
 
 exports.commands = commands
 
 const client = new Client({
-    authStrategy: new LocalAuth(),
-    puppeteer: { handleSIGINT: false }
+	authStrategy: new LocalAuth(),
+	puppeteer: { handleSIGINT: false },
 })
 
 exports.client = client
@@ -26,11 +29,11 @@ exports.server = Server
 client.on('qr', (qr) => QRCode.generate(qr, { small: true }))
 
 client.on('ready', () => {
-    console.log("Successfully logged in!")
+	console.log('Successfully logged in!')
 })
 
-client.on('message_create', message => {
-    parseMessage(message)
+client.on('message_create', (message) => {
+	parseMessage(message)
 })
 
 client.initialize()
@@ -43,54 +46,59 @@ client.initialize()
 // })
 
 async function parseMessage(message) {
-    let info =
-    {
-        isInGroup: false,
-        isCommand: false,
-        isSelf: false,
-        content: "",
-        sender: "",
-        group: "",
-        command: {
-            name: "",
-            args: [],
-            flags: []
-        }
-    }
+	let info = {
+		isInGroup: false,
+		isCommand: false,
+		isSelf: false,
+		content: '',
+		sender: '',
+		group: '',
+		command: {
+			name: '',
+			args: [],
+			flags: [],
+		},
+	}
 
-    if (message.body.toLowerCase().startsWith(`${config.prefix} `)) {
-        info.isCommand = true
-        info.command.name = message.body.substring(config.prefix.length).split(" ")[1]
-        info.command.args.push(message.body.substring(config.prefix.length + info.command.name.length + 2))
-    }
+	if (message.body.toLowerCase().startsWith(`${config.prefix} `)) {
+		info.isCommand = true
+		info.command.name = message.body
+			.substring(config.prefix.length)
+			.split(' ')[1]
+		info.command.args.push(
+			message.body.substring(
+				config.prefix.length + info.command.name.length + 2
+			)
+		)
+	}
 
-    if (message.fromMe)
-        info.isSelf = true
+	if (message.fromMe) info.isSelf = true
 
-    info.sender = message.from
-    info.content = message.body
+	info.sender = message.from
+	info.content = message.body
 
-    message.getChat().then(chat => {
-        if (chat.isGroup) {
-            info.isInGroup = true
-            info.group = chat.name
-        }
-    })
+	message.getChat().then((chat) => {
+		if (chat.isGroup) {
+			info.isInGroup = true
+			info.group = chat.name
+		}
+	})
 
-    console.log(info)
+	console.log(info)
 
-    if (info.isCommand) {
-        try {
-            commands.find(cmd => cmd.name == info.command.name).execute(message, info.command)
-        }
-        catch (error) {
-            message.reply(error)
-        }
-    }
+	if (info.isCommand) {
+		try {
+			commands
+				.find((cmd) => cmd.name == info.command.name)
+				.execute(message, info.command)
+		} catch (error) {
+			message.reply(error)
+		}
+	}
 }
 
 process.on('SIGINT', async () => {
-    console.log('\n[SIGINT] Quitting...')
-    await this.client.destroy()
-    process.exit(0)
+	console.log('\n[SIGINT] Quitting...')
+	await this.client.destroy()
+	process.exit(0)
 })

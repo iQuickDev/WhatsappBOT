@@ -1,129 +1,126 @@
 {
-    "list": [
-        {
-            "name": "tacchino",
-            "price": 2
-        },
-        {
-            "name": "tacchinone",
-            "price": 2.20
-        },
-        {
-            "name": "doc",
-            "price": 2
-        },
-        {
-            "name": "pancetta e fontina",
-            "price": 2
-        },
-        {
-            "name": "salame e fontina",
-            "price": 2
-        },
-        {
-            "name": "delicato",
-            "price": 2
-        },
-        {
-            "name": "milano",
-            "price": 2
-        },
-        {
-            "name": "cotto e mozzarella",
-            "price": 2.20
-        },
-        {
-            "name": "crudo e stracchino",
-            "price": 2
-        },
-        {
-            "name": "crudo rucola e philadelphia",
-            "price": 2
-        },
-        {
-            "name": "cotto e pomodoro",
-            "price": 2
-        },
-        {
-            "name": "funghi",
-            "price": 2
-        },
-        {
-            "name": "speck e brie",
-            "price": 2
-        },
-        {
-            "name": "tonno",
-            "price": 2
-        },
-        {
-            "name": "tonnone",
-            "price": 2.20
-        },
-        {
-            "name": "cotto e fontina",
-            "price": 2
-        },
-        {
-            "name": "caprese",
-            "price": 2
-        },
-        {
-            "name": "aggressivo",
-            "price": 2
-        },
-        {
-            "name": "prosciutto crudo",
-            "price": 2
-        },
-        {
-            "name": "salame",
-            "price": 2
-        },
-        {
-            "name": "pancetta",
-            "price": 2
-        },
-        {
-            "name": "mortadella",
-            "price": 2
-        },
-        {
-            "name": "cotto e maionese",
-            "price": 2
-        },
-        {
-            "name": "crf",
-            "price": 2
-        },
-        {
-            "name": "pizza",
-            "price": 2
-        },
-        {
-            "name": "mix",
-            "price": 2
-        },
-        {
-            "name": "nutellino",
-            "price": 1.10
-        },
-        {
-            "name": "coca cola",
-            "price": 1
-        },
-        {
-            "name": "acqua naturale",
-            "price": 0.50
-        },
-        {
-            "name": "acqua gassata",
-            "price": 0.50
-        }
-    ],
+	"list": [
+		{
+			"name": "tacchino",
+			"price": 2
+		},
+		{
+			"name": "tacchinone",
+			"price": 2.2
+		},
+		{
+			"name": "doc",
+			"price": 2
+		},
+		{
+			"name": "pancetta e fontina",
+			"price": 2
+		},
+		{
+			"name": "salame e fontina",
+			"price": 2
+		},
+		{
+			"name": "delicato",
+			"price": 2
+		},
+		{
+			"name": "milano",
+			"price": 2
+		},
+		{
+			"name": "cotto e mozzarella",
+			"price": 2.2
+		},
+		{
+			"name": "crudo e stracchino",
+			"price": 2
+		},
+		{
+			"name": "crudo rucola e philadelphia",
+			"price": 2
+		},
+		{
+			"name": "cotto e pomodoro",
+			"price": 2
+		},
+		{
+			"name": "funghi",
+			"price": 2
+		},
+		{
+			"name": "speck e brie",
+			"price": 2
+		},
+		{
+			"name": "tonno",
+			"price": 2
+		},
+		{
+			"name": "tonnone",
+			"price": 2.2
+		},
+		{
+			"name": "cotto e fontina",
+			"price": 2
+		},
+		{
+			"name": "caprese",
+			"price": 2
+		},
+		{
+			"name": "aggressivo",
+			"price": 2
+		},
+		{
+			"name": "prosciutto crudo",
+			"price": 2
+		},
+		{
+			"name": "salame",
+			"price": 2
+		},
+		{
+			"name": "pancetta",
+			"price": 2
+		},
+		{
+			"name": "mortadella",
+			"price": 2
+		},
+		{
+			"name": "cotto e maionese",
+			"price": 2
+		},
+		{
+			"name": "crf",
+			"price": 2
+		},
+		{
+			"name": "pizza",
+			"price": 2
+		},
+		{
+			"name": "mix",
+			"price": 2
+		},
+		{
+			"name": "nutellino",
+			"price": 1.1
+		},
+		{
+			"name": "coca cola",
+			"price": 1
+		},
+		{
+			"name": "acqua naturale",
+			"price": 0.5
+		},
+		{
+			"name": "acqua gassata",
+			"price": 0.5
+		}
+	],
 
-    "orders":
-    [
-
-    ]
+	"orders": []
 }
