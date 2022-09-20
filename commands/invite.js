@@ -1,6 +1,6 @@
 module.exports = {
-	name: 'renamegroup',
-	description: 'rename the group',
+	name: 'invite',
+	description: 'get a group invite link',
 	category: 'Admin',
 	execute: async (message, info) => {
 		if (await isAdmin(message)) {

@@ -1,5 +1,7 @@
 const wikifeet = require('wikifeet-js')
 const request = require('request').defaults({ encoding: null })
+const { MessageMedia } = require('whatsapp-web.js')
+
 module.exports = {
 	name: 'feet',
 	description: 'fetch a feet picture from wikifeet',

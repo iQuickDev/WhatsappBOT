@@ -1,5 +1,6 @@
 const { MessageMedia } = require('whatsapp-web.js')
 const request = require('request').defaults({ encoding: null })
+const google = require('googlethis')
 
 module.exports = {
 	name: 'image',

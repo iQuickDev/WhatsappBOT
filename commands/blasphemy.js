@@ -37,3 +37,7 @@ module.exports = {
 			)
 	},
 }
+
+function Randomizer(max) {
+	return Math.floor(Math.random() * max)
+}
