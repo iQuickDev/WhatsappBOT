@@ -1,8 +1,8 @@
 const config = require('../config.json')
 
 module.exports = {
-	name: 'eval',
-	description: 'evaluate js code',
+	name: 'version',
+	description: 'display the current version of the bot',
 	category: 'Reserved',
 	execute: (message, info) => {
 		message.reply(
