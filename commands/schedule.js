@@ -1,5 +1,5 @@
 const moment = require('moment')
-const schedule = require('../schedule.json')
+const schedule = require('../storage/schedule.json')
 module.exports = {
 	name: 'schedule',
 	description: 'display the school schedule for that day',

@@ -1,4 +1,4 @@
-const blasphemyPhrases = require('../blasphemy.json')
+const blasphemyPhrases = require('../storage/blasphemy.json')
 
 module.exports = {
 	name: 'blasphemy',

@@ -1,4 +1,4 @@
-const sandwiches = require('../sandwiches.json')
+const sandwiches = require('../storage/sandwiches.json')
 const index = require('../index')
 module.exports = {
 	name: 'panini',
