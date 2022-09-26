@@ -3,7 +3,7 @@ const myAnimeList = require('mal-scraper')
 module.exports = {
 	name: 'animeinfo',
 	description: 'fetch info about anime',
-	category: '',
+	category: 'Utility',
 	execute: async (message, info) => {
 		await myAnimeList
 			.getInfoFromName(info.args[0])

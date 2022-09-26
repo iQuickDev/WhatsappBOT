@@ -1,38 +1,50 @@
-const Omegle = require('omegle-node-fix')
-const { Server } = require('socket.io')
+const omegle = require('omegle-node-fix')
+const index = require('../index.js')
 
 module.exports = class OmegleManager {
-	omegleClient
-	io
+	socket
+	chat
+	listener
+	isReady = false
 
 	constructor() {
-		this.io = new Server(10831)
-		this.omegleClient = new Omegle()
-
-		this.omegleClient.on('gotMessage', (msg) => {
-			this.io.emit('receivedMessage', msg)
-		})
-
-		this.io.on('sendMessage', (msg) => {
-			this.omegleClient.send(msg)
-		})
-
-		this.omegleClient.on('disconnect', () => {
-			this.io.emit('disconnected')
-		})
-
-		console.log('OmegleManager loaded!')
+		console.log('OmegleManager was loaded')
 	}
 
-	getConnection() {
-		return this.omegleClient.connected
+	setup(chat) {
+		this.socket = new omegle()
+		this.chat = chat
+		this.listener = async (msg) => {
+			if (
+				!msg.body.startsWith('*[OMEGLE]*') &&
+				this.chat.id._serialized == (await msg.getChat()).id._serialized &&
+				this.socket.connected
+			)
+				this.socket.send(msg.body)
+		}
+		index.client.addListener('message_create', this.listener)
+		this.socket.language = 'it'
+		this.socket.on('gotMessage', (msg) => {
+			this.chat.sendMessage(`*[OMEGLE]*: ${msg}`)
+		})
+		this.socket.on('connected', () => {
+			console.log('connected')
+			this.chat.sendMessage(`*[OMEGLE]*: _connected_`)
+		})
+
+		this.socket.on('disconnected', () => {
+			console.log('disconnected')
+			this.chat.sendMessage(`*[OMEGLE]*: _disconnected_`)
+		})
+		this.isReady = true
+		this.connect()
 	}
 
 	connect() {
-		this.omegleClient.connect()
+		this.socket.connect()
 	}
 
 	disconnect() {
-		this.omegleClient.disconnect()
+		this.socket.disconnect()
 	}
 }

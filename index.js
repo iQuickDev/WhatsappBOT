@@ -1,5 +1,6 @@
 const { Client, LocalAuth } = require('whatsapp-web.js')
 const fs = require('fs')
+const OmegleManager = require('./omegle/OmegleManager.js')
 const ServerManager = require('./modules/ServerManager.js')
 const scheduler = require('node-schedule')
 const QRCode = require('qrcode-terminal')
@@ -25,6 +26,9 @@ exports.client = client
 
 const Server = new ServerManager()
 exports.server = Server
+
+const Omegle = new OmegleManager()
+exports.omegle = Omegle
 
 client.on('qr', (qr) => QRCode.generate(qr, { small: true }))
 

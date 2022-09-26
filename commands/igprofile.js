@@ -42,7 +42,7 @@ module.exports = {
 			verified,
 			profile_pic,
 		} = userdata
-		
+
 		message.reply(
 			`*Username*: ${username}\n*Full Name*: ${name}\n*Pronouns*: ${pronouns}\n*Followers*: ${followers}\n*Following:* ${following}\n*Biography*: ${biography}\n*Website*: ${website}\n*Business*: ${business}\n*Verified*: ${verified}\n*Private*: ${private}\n*Profile Picture*: ${profile_pic}`
 		)

@@ -1,5 +1,5 @@
 const config = require('../config.json')
-const {exec} = require('child_process')
+const { exec } = require('child_process')
 
 module.exports = {
 	name: 'update',
@@ -7,10 +7,15 @@ module.exports = {
 	category: 'Reserved',
 	execute: async (message, info) => {
 		if (isDev(message)) {
-			let newVersion = (await (await fetch('https://raw.githubusercontent.com/iQuickDev/WhatsappBOT/master/config.json')).json())
-			if (newVersion.version != config.version)
-			{
-				message.reply(`Update started\ncurrent version: ${config.version}\nnew version: ${newVersion.version}`)
+			let newVersion = await (
+				await fetch(
+					'https://raw.githubusercontent.com/iQuickDev/WhatsappBOT/master/config.json'
+				)
+			).json()
+			if (newVersion.version != config.version) {
+				message.reply(
+					`Update started\ncurrent version: ${config.version}\nnew version: ${newVersion.version}`
+				)
 				exec(
 					'git stash && git stash drop && git pull && npm install && pm2 restart WhatsappBOT',
 					(error, stdout, stderr) => {

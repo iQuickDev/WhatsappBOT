@@ -3,7 +3,7 @@ const schedule = require('../storage/schedule.json')
 module.exports = {
 	name: 'schedule',
 	description: 'display the school schedule for that day',
-	category: '',
+	category: 'Utility',
 	execute: async (message, info, isAutomatic = false) => {
 		let result = new String()
 		let currentDate = new Date()
