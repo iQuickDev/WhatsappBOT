@@ -1,4 +1,4 @@
-const { exec } = require('child_process')
+import { exec } from 'child_process'
 
 export const name = 'cputemp'
 export const description = 'display the temperature of the cpu'
