@@ -22,7 +22,7 @@ module.exports = {
 				users.push(participant.id.user)
 			}
 
-            shuffle(users)
+			shuffle(users)
 
 			for (let i = 0; i < users.length; i++) {
 				mentionString += `${i + 1}. @${users[i]}\n`

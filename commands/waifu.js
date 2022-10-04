@@ -1,5 +1,6 @@
 const waifu = require('waifu.pics.js')
 const request = require('request').defaults({ encoding: null })
+const { MessageMedia } = require('whatsapp-web.js')
 
 module.exports = {
 	name: 'waifu',
