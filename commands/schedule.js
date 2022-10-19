@@ -59,7 +59,7 @@ module.exports = {
 			classType = 'telecom'
 		else {
 			message.reply(
-				'Please specify a class (i/t)\nSyntax: wp schedule <class> <day> (optional) <time> (optional)'
+				'Please specify a class (i/t)\n*Syntax*: wp schedule <class> <day> (optional) <time> (optional)'
 			)
 			return
 		}

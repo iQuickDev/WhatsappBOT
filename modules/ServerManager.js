@@ -10,7 +10,7 @@ module.exports = class ServerManager {
 		this.app.use(express.json())
 		this.app.get('/', (req, res) => console.log(req.body))
 		this.app.get('/info', (req, res) => res.send(this.streamInfo))
-		console.log('ServerManager loaded!')
+		console.log('ServerManager was loaded')
 	}
 
 	start(port, streamInfo) {

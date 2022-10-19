@@ -1,6 +1,7 @@
 const { Client, LocalAuth } = require('whatsapp-web.js')
 const fs = require('fs')
-const OmegleManager = require('./omegle/OmegleManager.js')
+const OmegleManager = require('./helpers/OmegleManager.js')
+const ListManager = require('./helpers/ListManager.js')
 const ServerManager = require('./modules/ServerManager.js')
 const scheduler = require('node-schedule')
 const QRCode = require('qrcode-terminal')
@@ -14,6 +15,8 @@ fs.readdirSync('./commands')
 		commands.push(cmd)
 		console.info(`${file} was loaded`)
 	})
+
+//todo: put scheduler group IDs in dotenv, add polls command
 
 exports.commands = commands
 
@@ -29,6 +32,9 @@ exports.server = Server
 
 const Omegle = new OmegleManager()
 exports.omegle = Omegle
+
+const List = new ListManager()
+exports.list = List
 
 client.on('qr', (qr) => QRCode.generate(qr, { small: true }))
 

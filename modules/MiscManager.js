@@ -1,7 +1,7 @@
 const index = require('../index.js')
 const config = require('../config.json')
 const { io } = require('socket.io-client')
-const OmegleManager = require('../omegle/OmegleManager')
+const OmegleManager = require('../helpers/OmegleManager')
 const request = require('request')
 const JSDOM = require('jsdom').JSDOM
 const jwPlayerScraper = require('jwplayer-scraper')
