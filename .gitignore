@@ -1,2 +1,6 @@
 node_modules/*
 .wwebjs_auth
+# ignore intellij config
+.idea
+
+./storage/poll.json
