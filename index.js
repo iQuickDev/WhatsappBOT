@@ -69,17 +69,18 @@ async function parseMessage(message) {
 			flags: [],
 		},
 	}
-
 	if (message.body.toLowerCase().startsWith(`${config.prefix} `)) {
 		info.isCommand = true
-		info.command.name = message.body
-			.substring(config.prefix.length)
-			.split(' ')[1]
-		info.command.args.push(
-			message.body.substring(
-				config.prefix.length + info.command.name.length + 2
-			)
-		)
+
+		// analyze message by splitting it into an array with " " as separator
+		let arrayMsgContent = message.body.split(' ')
+		// set name of the command
+		info.command.name = arrayMsgContent[1]
+
+		// set the arguments of the command
+		for (let i = 2; i < arrayMsgContent.length; i++) {
+			info.command.args.push(arrayMsgContent[i])
+		}
 	}
 
 	if (message.fromMe) info.isSelf = true
