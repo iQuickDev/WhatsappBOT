@@ -3,68 +3,68 @@
 		{
 			"range": "08:00 - 08:50",
 			"subjects": {
-				"monday": "Matematica",
-				"tuesday": "TPSIT LAB",
+				"monday": "Inglese",
+				"tuesday": "Matematica",
 				"wednesday": "Inglese",
-				"thursday": "Matematica",
-				"friday": "Sistemi e Reti"
+				"thursday": "Storia",
+				"friday": "Matematica"
 			}
 		},
 		{
 			"range": "08:50 - 09:50",
 			"subjects": {
-				"monday": "Informatica",
-				"tuesday": "TPSIT LAB",
-				"wednesday": "Complementi",
-				"thursday": "Telecomunicazioni",
-				"friday": "Storia"
+				"monday": "Matematica",
+				"tuesday": "Storia",
+				"wednesday": "Informatica",
+				"thursday": "Relgione",
+				"friday": "Scienze Motorie"
 			}
 		},
 		{
 			"range": "09:50 - 10:45",
 			"subjects": {
-				"monday": "Italiano",
-				"tuesday": "Matematica",
-				"wednesday": "Telecomunicazioni",
-				"thursday": "Telecomunicazioni LAB",
-				"friday": "Italiano"
+				"monday": "TPSIT LAB",
+				"tuesday": "Informatica LAB",
+				"wednesday": "Sistemi e Reti LAB",
+				"thursday": "Inglese",
+				"friday": "Informatica"
 			}
 		},
 		{
 			"range": "10:55 - 11:50",
 			"subjects": {
-				"monday": "Italiano",
-				"tuesday": "Sistemi e Reti",
-				"wednesday": "Informatica",
-				"thursday": "Storia",
-				"friday": "Informatica LAB"
+				"monday": "TPSIT LAB",
+				"tuesday": "Informatica LAB",
+				"wednesday": "Sistemi e Reti LAB",
+				"thursday": "Gestione del Progetto",
+				"friday": "Sistemi e Reti"
 			}
 		},
 		{
 			"range": "11:50 - 12:45",
 			"subjects": {
-				"monday": "Scienze Motorie",
-				"tuesday": "Inglese",
+				"monday": "TPSIT LAB",
+				"tuesday": "Gestione del Progetto LAB",
 				"wednesday": "TPSIT",
-				"thursday": "Sistemi e Reti LAB",
-				"friday": "Informatica LAB"
+				"thursday": "Informatica LAB",
+				"friday": "Gestione del Progetto"
 			}
 		},
 		{
 			"range": "12:55 - 13:50",
 			"subjects": {
-				"monday": "Inglese",
-				"tuesday": "Scienze Motorie",
-				"wednesday": "Religione",
-				"thursday": "Sistemi e Reti LAB",
-				"friday": "Informatica LAB"
+				"monday": "Scienze Motorie",
+				"tuesday": "Italiano",
+				"wednesday": "Italiano",
+				"thursday": "Informatica LAB",
+				"friday": "Italiano"
 			}
 		},
 		{
 			"range": "13:50 - 14:40",
 			"subjects": {
-				"tuesday": "Italiano",
-				"thursday": "Informatica"
+				"wednesday": "Italiano",
+				"thursday": "Sistemi e Reti"
 			}
 		}
 	],
@@ -73,68 +73,68 @@
 		{
 			"range": "08:00 - 08:50",
 			"subjects": {
-				"monday": "Matematica",
-				"tuesday": "Sistemi e Reti LAB",
+				"monday": "Inglese",
+				"tuesday": "Matematica",
 				"wednesday": "Inglese",
-				"thursday": "Matematica",
-				"friday": "Informatica"
+				"thursday": "Storia",
+				"friday": "Matematica"
 			}
 		},
 		{
 			"range": "08:50 - 09:50",
 			"subjects": {
-				"monday": "Sistemi e Reti",
-				"tuesday": "Sistemi e Reti LAB",
-				"wednesday": "Complementi",
-				"thursday": "Informatica LAB",
-				"friday": "Storia"
+				"monday": "Matematica",
+				"tuesday": "Storia",
+				"wednesday": "TPSIT",
+				"thursday": "Religione",
+				"friday": "Scienze Motorie"
 			}
 		},
 		{
 			"range": "09:50 - 10:45",
 			"subjects": {
-				"monday": "Italiano",
-				"tuesday": "Matematica",
-				"wednesday": "Sistemi e Reti",
-				"thursday": "Informatica LAB",
-				"friday": "Italiano"
+				"monday": "Telecomunicazioni LAB",
+				"tuesday": "Sistemi e Reti LAB",
+				"wednesday": "Telecomunicazioni LAB",
+				"thursday": "Inglese",
+				"friday": "Telecomunicazioni"
 			}
 		},
 		{
 			"range": "10:55 - 11:50",
 			"subjects": {
-				"monday": "Italiano",
-				"tuesday": "Telecomunicazioni",
-				"wednesday": "Telecomunicazioni",
-				"thursday": "Storia",
-				"friday": "Telecomunicazioni"
+				"monday": "Telecomunicazioni LAB",
+				"tuesday": "Sistemi e Reti LAB",
+				"wednesday": "Telecomunicazioni LAB",
+				"thursday": "TPSIT LAB",
+				"friday": "Gestione del Progetto"
 			}
 		},
 		{
 			"range": "11:50 - 12:45",
 			"subjects": {
-				"monday": "Scienze Motorie",
-				"tuesday": "Inglese",
-				"wednesday": "TPSIT",
-				"thursday": "Telecomunicazioni LAB",
-				"friday": "TPSIT LAB"
+				"monday": "Gestione del Progetto LAB",
+				"tuesday": "Gestione del Progetto",
+				"wednesday": "Sistemi e Reti",
+				"thursday": "TPSIT LAB",
+				"friday": "Sistemi e Reti"
 			}
 		},
 		{
 			"range": "12:55 - 13:50",
 			"subjects": {
-				"monday": "Inglese",
-				"tuesday": "Scienze Motorie",
-				"wednesday": "Religione",
-				"thursday": "Telecomunicazioni LAB",
-				"friday": "TPSIT LAB"
+				"monday": "Scienze Motorie",
+				"tuesday": "Italiano",
+				"wednesday": "Italiano",
+				"thursday": "TPSIT LAB",
+				"friday": "Italiano"
 			}
 		},
 		{
 			"range": "13:50 - 14:40",
 			"subjects": {
-				"tuesday": "Italiano",
-				"thursday": "Telecomunicazioni LAB"
+				"tuesday": "Telecomunicazioni",
+				"wednesday": "Italiano"
 			}
 		}
 	]
