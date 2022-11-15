@@ -4,6 +4,7 @@ const OmegleManager = require('./helpers/OmegleManager.js')
 const ListManager = require('./helpers/ListManager.js')
 const ServerManager = require('./modules/ServerManager.js')
 const scheduler = require('node-schedule')
+const events = require('./storage/events.json')
 const QRCode = require('qrcode-terminal')
 const config = require('./config.json')
 let commands = []
@@ -15,8 +16,6 @@ fs.readdirSync('./commands')
 		commands.push(cmd)
 		console.info(`${file} was loaded`)
 	})
-
-//todo: put scheduler group IDs in dotenv, add polls command
 
 exports.commands = commands
 
@@ -48,12 +47,15 @@ client.on('message_create', (message) => {
 
 client.initialize()
 
-// scheduler.scheduleJob('1 0 * * *', async () =>
-// {
-//     modules[modules.indexOf(Admin)].clearpanini(null, true) // clearpanini
-//     client.sendMessage('393914783047-1599835416@g.us', modules[modules.indexOf(Utility)].schedule(null, {args: ['i']}, true)) // it
-//     client.sendMessage('393776703932-1600426162@g.us', modules[modules.indexOf(Utility)].schedule(null, {args: ['t']}, true)) // telecom
-// })
+for (const event of events) {
+	scheduler.scheduleJob(event.name, event.frequency, async () => {
+		if (event.target)
+			client.sendMessage(event.target, commands[event.command](event.args))
+		else commands[event.command](event.args)
+	})
+
+	console.log(`Scheduled event ${event.name} with command ${event.command}`)
+}
 
 async function parseMessage(message) {
 	let info = {

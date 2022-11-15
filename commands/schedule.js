@@ -5,6 +5,13 @@ module.exports = {
 	description: 'display the school schedule for that day',
 	category: 'Utility',
 	execute: async (message, info, isAutomatic = false) => {
+		if (info.args.length == 0) {
+			message.reply(
+				'Please specify a class (i/t)\n*Syntax*: wp schedule <class> <day> (optional) <time> (optional)'
+			)
+			return
+		}
+
 		let result = new String()
 		let currentDate = new Date()
 		let timestamp = `${
@@ -19,16 +26,16 @@ module.exports = {
 		let ranges = []
 		let timeLeft = new moment()
 
-		let args = info.args[0].split(' ')
-		let classType = args[0]
+		let classType = info.args[0]
+
 		let day =
-			args[1] == null
+			info.args[1] == null
 				? currentDate
 						.toLocaleDateString('en-US', { weekday: 'long' })
 						.toLowerCase()
-				: args[1]
-		let timeNow = moment(args[2], 'HH:mm').isValid()
-			? moment(args[2], 'HH:mm')
+				: info.args[1]
+		let timeNow = moment(info.args[2], 'HH:mm').isValid()
+			? moment(info.args[2], 'HH:mm')
 			: moment(timestamp, 'HH:mm')
 
 		if (day == 'saturday' || day == 'sunday') {
@@ -57,12 +64,6 @@ module.exports = {
 			classType == 'telecomunicazioni'
 		)
 			classType = 'telecom'
-		else {
-			message.reply(
-				'Please specify a class (i/t)\n*Syntax*: wp schedule <class> <day> (optional) <time> (optional)'
-			)
-			return
-		}
 
 		result += `*${day}*\n\n`.toUpperCase()
 

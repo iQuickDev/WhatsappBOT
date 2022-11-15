@@ -1,0 +1,22 @@
+[
+	{
+		"name": "Orario-5CIA",
+		"frequency": "1 0 * * *",
+		"command": "schedule",
+		"target": "393914783047-1599835416@g.us",
+		"args": [null, { "args": ["i"] }, true]
+	},
+	{
+		"name": "Orario-5ATL",
+		"frequency": "1 0 * * *",
+		"command": "schedule",
+		"target": "393776703932-1600426162@g.us",
+		"args": [null, { "args": ["t"] }, true]
+	},
+	{
+		"name": "ResetPanini",
+		"frequency": "1 0 * * *",
+		"command": "clearpanini",
+		"args": []
+	}
+]
