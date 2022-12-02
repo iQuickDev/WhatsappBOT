@@ -6,7 +6,8 @@ module.exports = {
 		'generate an ordered list of the participants of the group using a balanced algorithm based on previous lists',
 	category: 'Utility',
 	execute: async (message, info) => {
-		if (info.args[0] == '') {
+		console.log(info)
+		if (info.args.length == 0) {
 			let lists = '*Available Lists*: '
 			for (const list of index.list.pool) lists += list.name + ' '
 			message.reply(
@@ -16,18 +17,15 @@ module.exports = {
 			)
 			return
 		}
-
-		let args = [...info.args].toString().split(',')
-
-		switch (args[0]) {
+		
+		switch (info.args[0]) {
 			case 'generate': {
-				let objects = [...info.args]
-					.toString()
-					.split(',')
-					.map((o) => o.trim())
-				objects[0] = objects[0].substring(10 + args[1].length)
-				let generatedList = index.list.generate(args[1], objects)
-				let msg = `*${args[1]}*\n`
+				let participants = info.args.toString().replaceAll(',',' ').substring(
+					info.args[0].length + info.args[1].length + 2,
+					info.args.toString().length
+				).replace(/  +/gm, ',').split(',').map(o => o.trim())
+				let generatedList = index.list.generate(info.args[1], participants)
+				let msg = `*${info.args[1]}*\n`
 				for (let i = 0; i < generatedList.objects.length; i++)
 					msg += `${i + 1}. ${generatedList.objects[i].trim()}\n`
 				message.reply(msg)
@@ -42,7 +40,7 @@ module.exports = {
 				break
 			}
 			default: {
-				let foundList = index.list.pool.find((l) => l.name == info.args[0])
+				let foundList = index.list.pool.find((l) => l.name.toLowerCase() == info.args[0].toLowerCase())
 				if (!foundList) {
 					message.reply('*REJECTED*: List not found')
 					return
